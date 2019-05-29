@@ -1,0 +1,13 @@
+# Python stuff
+__pycache__/
+venv/
+
+# IDEs files
+.vscode
+*.swp
+
+# Flask stuff
+instance/
+
+# Application logs
+*.log
