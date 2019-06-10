@@ -11,8 +11,11 @@ Dockerfile
 *.swp
 
 # Python
-**/__pycache__/
+**/*__pycache__
 venv
 
 # Application logs
-*.log
+**/*.log
+
+# Local versioning of containers (used during development)
+docker_image_version

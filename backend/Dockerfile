@@ -7,6 +7,10 @@ COPY . /app/backend/
 ENV MUSICRACY_BACKEND_NAME=spotify
 ENV PYTHONPATH="$PYTHONPATH:/app/"
 
+WORKDIR /app/backend/
+
+RUN pip install -r requirements.txt
+
 EXPOSE 9001
 
 CMD ["python", "/app/backend/main.py"]

@@ -11,3 +11,7 @@ instance/
 
 # Application logs
 *.log
+
+# Config files
+config.py
+docker_image_version
