@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+      <div class="container-fluid">
+      {% if track_list|length >= 1 %}
+        <ul class="group-list playlist">
+        {% for track in track_list %}
+          <li class="group-list-item row playlist-item">
+            <div class="col-10 playlist-item-text">
+              <b>{{ track.name }}</b> <br> {{ track.artist }} <span style="font-weight:bold;">&#183;</span> {{ track.album }}
+            </div>
+            <div class="col-2 add-song">
+                <span class="fa fa-plus add-song-plus"></span>
+                <span class="track-id">{{ track.id }}</span>
+            </div>
+          </li>
+        {% endfor %}
+        </ul>
+
+        <form method="POST" id="voting-form">
+        </form>
+
+        <script>
+          main = function() {
+            $(".add-song").click(function(event){
+              var track_id = $(this).children(".track-id").text();
+              $("#voting-form").attr("action", "vote/" + track_id);
+              $("#voting-form").submit();
+            });
+          };
+          $(document).ready(main);
+        </script>
+
+      {% else %}
+        <p> No song was found with the given search parameters :(</p>
+      {% endif %}
+      </div>
+{% endblock %}

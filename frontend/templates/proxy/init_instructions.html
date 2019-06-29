@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block localstyle %}
+<style>
+    .rectangle {
+        height: 50%;
+        margin: 10%;
+        padding: 10px;
+        background: 2px solid #666;
+        border-radius: 25px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .container {
+        text-align: center;
+        height: 100%;
+        width: 100%;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="rectangle">
+        <h1>Instructions to use Musicracy and Spotify together:</h1>
+        <ol>
+            <li>Go to your Spotify player</li>
+            <li>Hit PLAY on the song SONGNAME that is in the playlist PLAYLISTNAME</li>
+            <li>Reload this page</li>
+            <li>Get the party started</li>
+        </ol>
+    </div>
+</div>
+{% endblock %}

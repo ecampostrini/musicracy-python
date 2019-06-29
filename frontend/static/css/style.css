@@ -1,0 +1,98 @@
+#voting-form{
+  display: none;
+}
+
+ul.playlist {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+li.playlist-item {
+  padding: 10px;
+  overflow: auto;
+  border-bottom: 1px solid #eeea;
+  display: flex;
+  align-items: center;
+}
+
+li.playlist-item:hover {
+  background: #eee;
+  cursor: pointer;
+}
+
+div.vote-icon {
+  border-radius: 25px;
+  border: 2px solid #666;
+  height: 50px;
+  line-height: 50px;
+  color: Steelblue;
+  text-align: center;
+}
+
+div.vote-icon.voted{
+  color: darkgrey;
+}
+
+div.add-song {
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+}
+
+span.add-song-plus {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  padding: 8px;
+
+  border: 2px solid #666;
+  color: SteelBlue;
+}
+
+span.track-id {
+  display: none;
+}
+
+@media only screen and (max-width: 600px) {
+  div.vote-icon {
+    height: 35px;
+    line-height: 35px;
+    font: 32px, Arial, sans-serif;
+  }
+
+  span.vote-icon-votes {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  span.vote-icon-thumbs {
+    font-size: 25px;
+  }
+
+  span.add-song-plus {
+    width: 40px;
+    height: 40px;
+    font-size: 25px;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  div.vote-icon {
+    font: 32px, Arial, sans-serif;
+  }
+
+  span.vote-icon-votes {
+    font-size: 25px;
+    margin-right: 5px;
+    font-weight: bold;
+  }
+
+  span.vote-icon-thumbs {
+    font-size: 30px;
+  }
+
+  span.add-song-plus {
+    font-size: 35px;
+  }
+}

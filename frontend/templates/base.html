@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% if title %}
+    <title>Musicracy - {{ title }}</title>
+    {% else %}
+    <title>Musicracy</title>
+    {% endif %}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+    {% block localstyle %}{% endblock %}
+    {% block localscript %}{% endblock %}
+
+  </head>
+  <body>
+    <nav class="navbar sticky-top navbar-light bg-dark navbar-dark">
+      <a class="navbar-brand" style="color:gray;" href="#"><img src="{{ url_for('static', filename='img/headphones.png')}}"></a>
+    {% if search_form is defined %}
+      <button class="btn btn-link navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsible">
+        <i class="fa fa-search"></i>
+      </button>
+
+      <!-- Navbar links -->
+      <div class="collapse navbar-collapse" id="collapsible">
+        <!-- <ul class="nav navbar-nav flex-row justify-content-between ml-auto"> -->
+        <ul class="nav navbar-nav">
+          <li class="nav-item px-1 py-2">
+            <form action="{{ url_for('player.search') }}" method="POST">
+              {{ search_form.hidden_tag() }}
+              <div class="form-group">
+                <label for="trackname" class="searchlabel" style="color: white">{{ search_form.track_name.label }}</label>
+                {{ search_form.track_name(class_='form-control', id='trackname') }}
+              </div>
+              <br>
+              <div class="form-group">
+                <label for="artistname" class="searchlabel" style="color: white">{{ search_form.artist_name.label }}</label>
+                {{ search_form.artist_name(class_='form-control', id='artistname') }}
+              </div>
+              <br>
+              <div class="form-group">
+                <label for="albumname" class="searchlabel" style="color: white">{{ search_form.album_name.label }}</label>
+                {{ search_form.album_name(class_='form-control', id='albumname') }}
+              </div>
+              <br>
+              {{ search_form.submit(class_="btn btn-primary btn-block") }}
+            </form>
+          </li>
+        </ul>
+      </div>
+    {% endif %}
+    </nav>
+
+    {% block content %}{% endblock %}
+  </body>
+</html>

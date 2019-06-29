@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block localscript %}
+<script>
+  main = function () {
+    $(".vote-icon").click(function (event) {
+      var track_id = $(this).children(".track-id").text();
+      $("#voting-form").attr("action", "vote/" + track_id);
+      $("#voting-form").submit();
+    });
+  };
+  $(document).ready(main);
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+  {% if songs is defined %}
+  <ul class="group-list playlist">
+    {% for track_info in songs %}
+    <li class="group-list-item row playlist-item">
+      <div class="col-9 playlist-item-text">
+        <b>{{ track_info.name }}</b> <br> {{ track_info.artist }}
+        <!--<span style="font-weight:bold;">&#183;</span> {{ track_info.album }}-->
+      </div>
+      {% if track_info.id in voted_tracks %}
+      <div class="col-3 vote-icon voted">
+      {% else %}
+      <div class="col-3 vote-icon">
+      {% endif %}
+        <span class="vote-icon-votes">{{ track_info.votes }}</span>
+        <span class="fa fa-thumbs-up vote-icon-thumbs"></span>
+        <span class="track-id">{{track_info.id}}</span>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <form method="POST" id="voting-form">
+  </form>
+
+  {% else %}
+  <h1>There are no songs in the playlist</h1>
+  {% endif %}
+</div>
+{% endblock %}

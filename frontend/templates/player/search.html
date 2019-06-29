@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+      <div class="container">
+        <div class="page-header">
+          <h1 class="text-center">Search songs !</h1>
+        </div>
+        <form action="" class="form-horizontal" autocomplete="off" method="post">
+          {{ search_form.hidden_tag() }}
+          <div class="input-group">
+            <span class="input-group-addon">{{ search_form.track_name.label }}</span>
+            {{ search_form.track_name(class_="form-control") }}
+          </div>
+          <br>
+          <div class="input-group">
+            <span class="input-group-addon">{{ search_form.artist_name.label }}</span>
+            {{ search_form.artist_name(class_="form-control") }}
+          </div>
+          <br>
+          <div class="input-group">
+            <span class="input-group-addon">{{ search_form.album_name.label }}</span>
+            {{ search_form.album_name(class_="form-control") }}
+          </div>
+          <br>
+          {{ search_form.submit(class_="btn btn-primary btn-block") }}
+        </form>
+      </div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block localstyle %}
+    <style>
+      div.error-container {
+        border-radius: 10px;
+        border-color: #85144b;
+        border-style: solid;
+        border-width: thin;
+        margin: 10px auto;
+        padding: 7px;
+        background-color: #FF4136;
+        text-align: center;
+      }
+
+      span.error-text {
+        color: white;
+        font-family: arial, verdana, sans-serif;
+      }
+
+      div.login {
+        margin-top: 10px;
+        text-align: center;
+      }
+
+      form.login-form {
+        margin: 0px 10px;
+      }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+    {% if error_text %}
+      <div class="container-fluid error-container">
+        <span class="error-text">{{ error_text }}</span>
+      </div>
+    {% endif %}
+      <div class="login">
+        <form action={{ url_for('player.login') }} class="form-vertical login-form" method="POST">
+          <div class="form-group">
+            <span class="login-text">Enter a username</span>
+            <br>
+            <input type="text" name="username" class="form-control">
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
+      </div>
+    </div>
+{% endblock %}
