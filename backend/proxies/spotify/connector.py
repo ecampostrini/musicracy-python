@@ -59,7 +59,7 @@ class SpotifyConnector:
             AUTH_URL, urlencode(authentication_params))
 
         # This response goes all the way up to the front-end which expects JSON
-        return {"Location": authentication_url}
+        return {"location": authentication_url}
 
     def complete_login(self, **kwargs):
         """Gets the parameters back from Spotify after a successful login"""

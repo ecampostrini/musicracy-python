@@ -125,20 +125,24 @@ def getHandler(player):
                 return
 
             if path == "/vote":
-                raw_body = self.rfile.read(self.headers.get("Content-Length"))
+                raw_body = self.rfile.read(
+                    int(self.headers.get("Content-Length")))
                 obj = json.loads(raw_body)
                 player.vote(**obj)
-                self.send_response(200)
+                self.send_response(204)
+                self.end_headers()
                 return
 
             if path == "/play":
                 response = player.play()
-                self.send_response(200, json.dumps(response))
+                self.send_response(204)
+                self.end_headers()
                 return
 
             if path == "/pause":
                 response = player.pause()
-                self.send_response(200, json.dumps(response))
+                self.send_response(204)
+                self.end_headers()
                 return
 
             self.send_error(400, "No such POST endpoint: {}".format(path))

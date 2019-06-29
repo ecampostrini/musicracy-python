@@ -306,6 +306,6 @@ class SpotifyClient(SpotifyConnector, DemocraticPlaylist):
             track_info = tracks_cache[track_id]
         else:
             track_info = self.get_track(track_id)
-
+            logger.debug("Will vote track with info: %s", track_info)
         # Call the method from the base class
         DemocraticPlaylist.vote(self, track_info)

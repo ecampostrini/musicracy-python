@@ -4,7 +4,7 @@
 
 from collections import namedtuple
 
-from backend.utils.backend_adapter import BackendAdapter
+from backend.utils.backend_adapter import BackendAdapter, TrackInfo
 
 UserDevice = namedtuple('UserDevice', ['name', 'type', 'id', 'is_active'])
 
@@ -85,9 +85,14 @@ def get_playlist_tracks_adapter(json_response):
     return ret
 
 
-def get_track_adapter(json_response):
+def get_track_adapter(json):
     """ Extracts a TrackInfo from json """
-    return json_to_track_info(json_response)
+    return TrackInfo(
+        json['name'],                       # Track name
+        json['artists'][0]['name'],         # Artist
+        json['album']['name'],              # Album name
+        json['uri'],                        # Track id
+        int(json['duration_ms']) / 1000)    # Track length in seconds
 
 
 backend_adapter = BackendAdapter()

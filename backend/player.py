@@ -27,7 +27,7 @@ class Player:
         """Returns an dictionary containing the tracks from the playlist along
            with the amount of votes each track has
         """
-        return self.proxy.get_playlist()
+        return self.proxy.get_tracks()
 
     def vote(self, *args, **kwargs):
         """ Adds a vote to the track with id track_id """

@@ -10,6 +10,7 @@ TrackInfo = namedtuple('TrackInfo', ['name', 'artist', 'album', 'id', 'length'])
 AlbumInfo = namedtuple('AlbumInfo', ['name', 'artist', 'id'])
 ArtistInfo = namedtuple('ArtistInfo', ['name', 'id'])
 
+
 class BackendAdapter:
     """ Contains an adapter registry and the decorator used to apply the adapter """
 
@@ -26,3 +27,14 @@ class BackendAdapter:
             adapter = self.adapter_registry[backend_function.__name__]
             return adapter(backend_function(*args, **kwargs))
         return adapted_method
+
+
+def track_info_2_json(track_info: TrackInfo):
+    """ Convenience function to construct a JSON object from a TrackInfo one"""
+    return {
+        "name": track_info.name,
+        "artist": track_info.artist,
+        "album": track_info.album,
+        "id": track_info.id,
+        "length": track_info.length
+    }

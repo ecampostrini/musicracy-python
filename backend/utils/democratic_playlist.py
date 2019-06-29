@@ -1,5 +1,7 @@
 from threading import RLock
 
+from backend.utils.backend_adapter import track_info_2_json
+
 
 class EmptyPlaylistException(Exception):
     def __init__(self):
@@ -94,4 +96,10 @@ class DemocraticPlaylist:
             playlist. The list is reversed so that elements are ordered decreasingly
             according to the number of votes """
         with self._lock:
-            return self._track_list[::-1]
+            ret = []
+            for (votes, t_info) in self._track_list[::-1]:
+                info = {"votes": votes}
+                info = {**info, **track_info_2_json(t_info)}
+                ret.append(info)
+            return {"result": ret}
+            # return self._track_list[::-1]
