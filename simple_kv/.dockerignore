@@ -1,0 +1,21 @@
+# Docker files
+.dockerignore
+Dockerfile
+
+# Git
+.git
+.gitignore
+
+# IDEs
+.vscode/
+*.swp
+
+# Python
+**/*__pycache__
+venv
+
+# Application logs
+**/*.log
+
+# Local versioning of containers (used during development)
+docker_image_version
