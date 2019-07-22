@@ -4,6 +4,8 @@
 <script>
   main = function () {
     $(".vote-icon").click(function (event) {
+      if ($(this).hasClass("voted")) return;
+
       var track_id = $(this).children(".track-id").text();
       $("#voting-form").attr("action", "vote/" + track_id);
       $("#voting-form").submit();
@@ -25,13 +27,13 @@
       </div>
       {% if track_info.id in voted_tracks %}
       <div class="col-3 vote-icon voted">
-      {% else %}
-      <div class="col-3 vote-icon">
-      {% endif %}
-        <span class="vote-icon-votes">{{ track_info.votes }}</span>
-        <span class="fa fa-thumbs-up vote-icon-thumbs"></span>
-        <span class="track-id">{{track_info.id}}</span>
-      </div>
+        {% else %}
+        <div class="col-3 vote-icon">
+          {% endif %}
+          <span class="vote-icon-votes">{{ track_info.votes }}</span>
+          <span class="fa fa-thumbs-up vote-icon-thumbs"></span>
+          <span class="track-id">{{track_info.id}}</span>
+        </div>
     </li>
     {% endfor %}
   </ul>

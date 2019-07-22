@@ -1,11 +1,11 @@
 import os
-
 import sys
-from flask_sqlalchemy import SQLAlchemy
+
 from flask import Flask, session, url_for, request, redirect, render_template
 
 from frontend.player import player as player_blueprint
-from frontend.utils.request_helpers import get_requests_helpers
+from frontend.utils.request_helpers import ping as ping_backend, get
+from frontend.utils.simple_kv_helpers import ping as ping_simple_kv
 from frontend.utils.log import get_logger
 
 
@@ -20,14 +20,9 @@ def no_proxy_url_error(error, endpoint, **values):
 
 app = Flask(__name__)
 
-# Flask extensions
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///musicracy.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config["SECRET_KEY"] = "this is my super secret key"
-db = SQLAlchemy(app)
 
 # Request helpers available to the blueprints below
-ping_backend, post, get = get_requests_helpers()
 
 stage = "start_login"
 @app.before_request
@@ -78,6 +73,7 @@ app.register_blueprint(player_blueprint, url_prefix=player_blueprint_url_prefix)
 if __name__ == "__main__":
     try:
         ping_backend()
+        ping_simple_kv()
     except Exception as e:
         logger.error("Exception during initialization: %s", str(e))
         sys.exit(1)
