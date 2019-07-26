@@ -1,0 +1,17 @@
+version: '3'
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "5000:5000"
+    environment:
+      - BACKEND_HOST=backend
+      - SIMPLE_KV_HOST=simple_kv
+  backend:
+    build: ./backend
+    ports:
+      - "5001:5001"
+  simple_kv:
+    build: ./simple_kv
+    ports:
+      - "5002:5002"
