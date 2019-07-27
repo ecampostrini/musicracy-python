@@ -1,6 +1,7 @@
 from threading import RLock
 
 from backend.utils.backend_adapter import track_info_2_json
+from backend.utils.simple_kv_helpers import delete as delete_from_simple_kv
 
 
 class EmptyPlaylistException(Exception):
@@ -73,6 +74,9 @@ class DemocraticPlaylist:
 
             _, self._current_track = self._track_list.pop()
             del self._track_map[self._current_track.id]
+            # Remove the track from the simple_kv so that the clients
+            # that vote for it can vote it again
+            delete_from_simple_kv(self._current_track.id)
             return self._current_track
 
     def _next_from_default_playlist(self):

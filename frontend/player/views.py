@@ -59,7 +59,7 @@ def vote(track_id):
     try:
         if track_id not in retrieve(request.remote_addr)["value"]:
             store(request.remote_addr, track_id)
-            post("vote", **{"track_uri": track_id})
+            post("vote", **{"track_id": track_id})
         return redirect(url_for("player.playlist"))
     except RuntimeError as e:
         logger.error("Exception caught while processing vote: %s", str(e))

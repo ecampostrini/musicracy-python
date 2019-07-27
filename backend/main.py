@@ -9,6 +9,7 @@ import json
 import os
 
 from backend.utils.log import get_logger
+from backend.utils.simple_kv_helpers import ping as ping_simple_kv
 from player import Player
 
 HOSTNAME = os.environ.get("BACKEND_HOSTNAME", "0.0.0.0")
@@ -163,6 +164,8 @@ def get_backend():
 
 
 if __name__ == '__main__':
+    ping_simple_kv()
+
     backend = get_backend()
     player = Player(backend)
     handlerClass = getHandler(player)

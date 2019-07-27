@@ -276,9 +276,10 @@ class SpotifyClient(SpotifyConnector, DemocraticPlaylist):
 
     @backend_adapter.register
     @spotify_request
-    def get_track(self, track_id):
-        """ Gets the track_info associated to the given track_id """
+    def get_track(self, track_uri):
+        """ Gets the track_info associated to the given track_uri """
 
+        track_id = track_uri.split(":")[-1]
         endpoint = '{api_url}tracks/{track_id}'.format(
             api_url=API_URL, track_id=track_id)
 
@@ -300,12 +301,12 @@ class SpotifyClient(SpotifyConnector, DemocraticPlaylist):
         """ Override of the method from the DemocraticPlaylist to get the track info based on the
             ID of the track being voted """
 
-        track_id = kwargs["track_uri"].split(":")[-1]
+        track_uri = kwargs["track_id"]
         track_info = None
-        if track_id in tracks_cache:
-            track_info = tracks_cache[track_id]
+        if track_uri in tracks_cache:
+            track_info = tracks_cache[track_uri]
         else:
-            track_info = self.get_track(track_id)
+            track_info = self.get_track(track_uri)
             logger.debug("Will vote track with info: %s", track_info)
         # Call the method from the base class
         DemocraticPlaylist.vote(self, track_info)

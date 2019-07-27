@@ -16,7 +16,7 @@ def get_extra_endpoints():
 
 
 def get_client():
-    """ Very small factory that creates an instance of the client
+    """ Very small factory that creates an instance of the client,
         taking care of whatever internal configuration that may be required
     """
     return SpotifyClient(**CONFIG)
