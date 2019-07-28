@@ -135,13 +135,13 @@ def getHandler(player):
                 return
 
             if path == "/play":
-                response = player.play()
+                # response = player.play()
                 self.send_response(204)
                 self.end_headers()
                 return
 
             if path == "/pause":
-                response = player.pause()
+                # response = player.pause()
                 self.send_response(204)
                 self.end_headers()
                 return

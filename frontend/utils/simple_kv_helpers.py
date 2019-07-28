@@ -1,8 +1,8 @@
+""" Utility functions to send requests to the Simple KV """
 import os
-import json
 import time
-from requests import get, post, exceptions
 from urllib.parse import urlencode
+from requests import get, post, exceptions
 
 from frontend.utils.log import get_logger
 
@@ -64,8 +64,6 @@ def retrieve(key, max_retries=MAX_RETRIES):
         try:
             r = get(SIMPLE_KV_URL, params=urlencode({"key": key}))
             r.raise_for_status()
-            # TODO remove this log
-            logger.debug("Retrieve got this: %s", r.json())
             return r.json() if r.text else None
         except (exceptions.ConnectionError, exceptions.ConnectTimeout) as err:
             if max_retries == 0:
